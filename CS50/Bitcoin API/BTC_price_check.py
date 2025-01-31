@@ -3,6 +3,7 @@ import requests
 import sys
 
 def main():
+    #checking if there is only one command line argument (ammount to buy) and catching errors
     try:
         if len(sys.argv) != 2:
             sys.exit("Missing command-line argument")
@@ -17,8 +18,10 @@ def main():
 def get_price():
     while True:
         try:
+            #getting bitcoin price data
             bitcoin = requests.get("https://api.coindesk.com/v1/bpi/currentprice.json")
             o = bitcoin.json()
+            #returning current $USD value
             return o["bpi"]["USD"]["rate_float"]
         except requests.RequestException:
             continue
