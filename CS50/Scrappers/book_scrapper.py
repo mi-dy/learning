@@ -1,6 +1,7 @@
 import httpx
 from bs4 import BeautifulSoup
 import re
+import json
 
 
 def get_html_as_str(url: str) -> str:
@@ -54,8 +55,9 @@ def check_next_page(html: str) -> str| None:
             return None
 
 
-def save() -> None:
-    ...
+def save(main_dict: dict) -> None:
+    with open("books.json", 'a') as file:
+            json.dump(main_dict, file, indent=4)
 
 
 if __name__ == "__main__":
@@ -67,5 +69,4 @@ if __name__ == "__main__":
         main_dict[genre["genre"]] = {}
         genre_html = get_html_as_str(url + genre["link"])
         get_books(genre_html, genre, main_dict, url)
-
-    print(main_dict)
+    save(main_dict)
