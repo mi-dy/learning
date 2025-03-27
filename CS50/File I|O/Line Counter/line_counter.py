@@ -1,7 +1,6 @@
 import sys
 
 def main():
-  #expecting the name of the python file
     if len(sys.argv) != 2:
         sys.exit("Too many argumants")
     elif ".py" not in sys.argv[1]:
@@ -9,7 +8,7 @@ def main():
     else:
         x = len_checker(sys.argv[1])
     print(f"{x} lines of code")
-#checking the number of code lines excluding empty lines and "#" comments
+  
 def len_checker(file):
     count = 0
     try:
@@ -23,6 +22,7 @@ def len_checker(file):
             return count
     except FileNotFoundError:
         sys.exit("File does not exist")
+
 
 if __name__ == "__main__":
     main()
